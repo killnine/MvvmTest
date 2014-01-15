@@ -1,0 +1,31 @@
+﻿<mui:ModernWindow x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+        Title="MVVM Test Application" Height="600" Width="800"
+        IsTitleVisible="True"
+        ContentSource="/Pages/MachineStatusView.xaml">
+    <mui:ModernWindow.TitleLinks>
+        <mui:Link DisplayName="Settings"/>
+    </mui:ModernWindow.TitleLinks>
+    <mui:ModernWindow.MenuLinkGroups>
+        <mui:LinkGroup DisplayName="Machine Status">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="" Source="/Pages/MachineStatusView.xaml"/>
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="Charts">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Chart 1"/>
+                <mui:Link DisplayName="Chart 2"/>
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="GUI Tests">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="TreeView Page" />
+                <mui:Link DisplayName="Custom List" />
+                <mui:Link DisplayName="Reporting" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+    </mui:ModernWindow.MenuLinkGroups>
+</mui:ModernWindow>
