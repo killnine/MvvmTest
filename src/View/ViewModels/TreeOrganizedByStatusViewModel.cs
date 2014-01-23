@@ -9,6 +9,12 @@ using View.Annotations;
 
 namespace View.ViewModel
 {
+    public class StatusNode
+    {
+        public IList<Machine> Machines { get; set; }
+        public Status Status { get; set; }
+    }
+
     public class TreeOrganizedByStatusViewModel : BaseTreeDataViewModel, INotifyPropertyChanged
     {
         private string _searchTerm;

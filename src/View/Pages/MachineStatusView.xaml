@@ -55,7 +55,7 @@
         <DataTemplate DataType="{x:Type viewModel:TreeOrganizedByNameViewModel}">
             <helpers:ExtendedTreeView BorderThickness="0" ItemsSource="{Binding TreeData}" WritableSelectedItem="{Binding SelectedItem, Mode=TwoWay}" ItemTemplate="{StaticResource MachineTemplate}" Grid.RowSpan="2" Grid.Row="1" Margin="0,6,-7,0"/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type model:DeviceStatus}">
+        <DataTemplate DataType="{x:Type model:Device}">
             <TextBlock Text="DeviceStatus Template"/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type model:Machine}">

@@ -5,11 +5,12 @@ namespace Model
 {
     public class Machine
     {
-        private IList<DeviceStatus> _devices = new List<DeviceStatus>();
+        private IList<Device> _devices = new List<Device>();
 
+        public int MachineId { get; set; }
         public string Location { get; set; }
         public string MachineName { get; set; }
-        public IList<DeviceStatus> Devices
+        public IList<Device> Devices
         {
             get { return _devices; }
             set { _devices = value; }

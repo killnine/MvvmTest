@@ -12,14 +12,11 @@
   See http://www.galasoft.ch/mvvm
 */
 
-using System;
-using System.Collections.Generic;
 using CommonServiceLocator.NinjectAdapter;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
-using Model;
 using Ninject;
+using View.ViewModels;
 
 namespace View.ViewModel
 {
@@ -43,11 +40,13 @@ namespace View.ViewModel
             {
                 // Create design time view services and models
                 k.Bind<MachineStatusViewModel>().ToSelf();
+                k.Bind<SystemsViewModel>().ToSelf();
             }
             else
             {
                 // Create run time view services and models
                 k.Bind<MachineStatusViewModel>().ToSelf();
+                k.Bind<SystemsViewModel>().ToSelf();
             }
         }
 
@@ -56,6 +55,14 @@ namespace View.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MachineStatusViewModel>();
+            }
+        }
+
+        public SystemsViewModel SystemsViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SystemsViewModel>();
             }
         }
         

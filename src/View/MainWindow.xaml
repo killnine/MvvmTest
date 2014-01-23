@@ -14,17 +14,15 @@
                 <mui:Link DisplayName="" Source="/Pages/MachineStatusView.xaml"/>
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
-        <mui:LinkGroup DisplayName="Charts">
+        <mui:LinkGroup DisplayName="Reports">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="Chart 1"/>
-                <mui:Link DisplayName="Chart 2"/>
+                <mui:Link DisplayName="Version Report"/>
+                <mui:Link DisplayName="Configuration Report"/>
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
-        <mui:LinkGroup DisplayName="GUI Tests">
+        <mui:LinkGroup DisplayName="Administration">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="TreeView Page" />
-                <mui:Link DisplayName="Custom List" />
-                <mui:Link DisplayName="Reporting" />
+                <mui:Link DisplayName="" Source="/Pages/Administration.xaml"/>
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
     </mui:ModernWindow.MenuLinkGroups>

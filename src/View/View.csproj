@@ -125,21 +125,57 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Configuration\NinjectConfiguration.cs" />
+    <Compile Include="Content\Administration\ConfigurationAddresses.xaml.cs">
+      <DependentUpon>ConfigurationAddresses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Administration\Configurations.xaml.cs">
+      <DependentUpon>Configurations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Administration\Devices.xaml.cs">
+      <DependentUpon>Devices.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Administration\Machines.xaml.cs">
+      <DependentUpon>Machines.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Administration\Systems.xaml.cs">
+      <DependentUpon>Systems.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Controls\ExtendedTreeView.cs" />
-    <Compile Include="Helpers\EnumConverter.cs" />
+    <Compile Include="Helpers\Converters\EnumConverter.cs" />
     <Compile Include="Helpers\Extensions.cs" />
-    <Compile Include="Helpers\StatusToImageConverter.cs" />
+    <Compile Include="Helpers\Converters\StatusToImageConverter.cs" />
+    <Compile Include="Pages\Administration.xaml.cs">
+      <DependentUpon>Administration.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="ViewModel\BaseTreeDataViewModel.cs" />
-    <Compile Include="ViewModel\DeviceTypeNode.cs" />
-    <Compile Include="ViewModel\TreeOrganizedByDeviceTypeViewModel.cs" />
-    <Compile Include="ViewModel\LocationNode.cs" />
-    <Compile Include="ViewModel\MachineStatusViewModel.cs" />
-    <Compile Include="ViewModel\StatusNode.cs" />
-    <Compile Include="ViewModel\TreeOrganizedByLocationViewModel.cs" />
-    <Compile Include="ViewModel\TreeOrganizedByNameViewModel.cs" />
-    <Compile Include="ViewModel\TreeOrganizedByStatusViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="ViewModels\BaseTreeDataViewModel.cs" />
+    <Compile Include="ViewModels\Administration\SystemsViewModel.cs" />
+    <Compile Include="ViewModels\TreeOrganizedByDeviceTypeViewModel.cs" />
+    <Compile Include="ViewModels\MachineStatusViewModel.cs" />
+    <Compile Include="ViewModels\TreeOrganizedByLocationViewModel.cs" />
+    <Compile Include="ViewModels\TreeOrganizedByNameViewModel.cs" />
+    <Compile Include="ViewModels\TreeOrganizedByStatusViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Page Include="Content\Administration\ConfigurationAddresses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Administration\Configurations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Administration\Devices.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Administration\Machines.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Administration\Systems.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -152,11 +188,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\Administration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MachineStatusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\TreeViewPage.xaml">
+    <Page Include="Resources\IconData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -164,9 +204,6 @@
   <ItemGroup>
     <Compile Include="Pages\MachineStatusView.xaml.cs">
       <DependentUpon>MachineStatusView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\TreeViewPage.xaml.cs">
-      <DependentUpon>TreeViewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -196,8 +233,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\" />
-    <Folder Include="Helpers\Converters\" />
+    <Folder Include="Content\MachineStatus\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

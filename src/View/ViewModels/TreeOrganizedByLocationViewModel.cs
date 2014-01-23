@@ -8,6 +8,12 @@ using View.Annotations;
 
 namespace View.ViewModel
 {
+    public class LocationNode
+    {
+        public IList<Machine> Machines { get; set; }
+        public string Location { get; set; }
+    }
+
     public class TreeOrganizedByLocationViewModel : BaseTreeDataViewModel, INotifyPropertyChanged
     {
         private string _searchTerm;

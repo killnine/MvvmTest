@@ -5,6 +5,12 @@ using Model;
 
 namespace View.ViewModel
 {
+    public class DeviceTypeNode
+    {
+        public IDictionary<string, Device> Devices { get; set; }
+        public string DeviceType { get; set; }
+    }
+
     public class TreeOrganizedByDeviceTypeViewModel : BaseTreeDataViewModel
     {
         private string _searchTerm;
@@ -47,7 +53,7 @@ namespace View.ViewModel
                     else
                     {
                         var newStatusNode = new DeviceTypeNode {DeviceType = node.DeviceType};
-                        IDictionary<string, DeviceStatus> compositeDeviceList = new Dictionary<string, DeviceStatus>();
+                        IDictionary<string, Device> compositeDeviceList = new Dictionary<string, Device>();
                         foreach (var kvp in node.Devices)
                         {
                             if (kvp.Value.DeviceName.Contains(SearchTerm))
@@ -74,7 +80,7 @@ namespace View.ViewModel
             foreach (Machine machine in machines)
             {
                 if (machine.Devices != null)
-                    foreach (DeviceStatus device in machine.Devices)
+                    foreach (Device device in machine.Devices)
                     {
                         if (_treeData.Any(t => t.DeviceType == device.DeviceType))
                         {
@@ -86,7 +92,7 @@ namespace View.ViewModel
                             _treeData.Add(new DeviceTypeNode
                                 {
                                     DeviceType = device.DeviceType, 
-                                    Devices = new Dictionary<string, DeviceStatus>()
+                                    Devices = new Dictionary<string, Device>()
                                         {
                                             { string.Format("{0} - {1}",machine.MachineName, device.DeviceName), device }
                                         }

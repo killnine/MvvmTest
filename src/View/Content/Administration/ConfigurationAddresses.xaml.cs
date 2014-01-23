@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace View.Pages
+namespace View.Content.Administration
 {
     /// <summary>
-    /// Interaction logic for TreeViewPage.xaml
+    /// Interaction logic for ConfigurationAddresses.xaml
     /// </summary>
-    public partial class TreeViewPage : UserControl
+    public partial class ConfigurationAddresses : UserControl
     {
-        public TreeViewPage()
+        public ConfigurationAddresses()
         {
             InitializeComponent();
         }
