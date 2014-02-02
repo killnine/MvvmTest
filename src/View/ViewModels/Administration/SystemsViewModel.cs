@@ -4,7 +4,6 @@ using System.Windows.Input;
 using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight;
 using Model;
-using Model.DataAccess;
 
 namespace View.ViewModels
 {
@@ -50,8 +49,7 @@ namespace View.ViewModels
 
         private void AddSystem(object obj)
         {
-            var newSystem = RepositoryFactory.EquipmentRepository.CreateSystem();
-            RefreshSystems(newSystem.SystemId);
+            return;
         }
 
         private bool CanRemoveSystem(object arg)
@@ -61,7 +59,7 @@ namespace View.ViewModels
 
         private void RemoveSystem(object obj)
         {
-            RepositoryFactory.EquipmentRepository.DeleteSystem(SelectedSystem.SystemId);
+            return;
         }
 
         private bool CanSaveSystem(object arg)
@@ -71,17 +69,12 @@ namespace View.ViewModels
 
         public void SaveSystem(object obj)
         {
-            RepositoryFactory.EquipmentRepository.UpdateSystem(SelectedSystem);
+            return;
         }
 
         private void RefreshSystems(int selectedSystemId = -1)
         {
-            Systems = RepositoryFactory.EquipmentRepository.SelectSystems();
-
-            if (selectedSystemId != -1)
-            {
-                SelectedSystem = Systems.First(s => s.SystemId == selectedSystemId);
-            }
+            return;
         }
     }
 }

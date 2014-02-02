@@ -6,7 +6,6 @@ using System.Windows.Input;
 using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight;
 using Model;
-using Model.DataAccess;
 
 namespace View.ViewModel
 {
@@ -43,7 +42,7 @@ namespace View.ViewModel
             TreeViewModel = _organizedByDeviceTypeViewModel;
         }
 
-        private IList<Machine> _machines; 
+        private IList<Machine> _machines = new List<Machine>(); 
         public IList<Machine> Machines
         {
             get { return _machines; }
@@ -67,8 +66,6 @@ namespace View.ViewModel
 
         public MachineStatusViewModel()
         {
-            Machines = RepositoryFactory.EquipmentRepository.SelectMachines();
-
             //Set up different views for the TreeView
             _organizedByDeviceTypeViewModel = new TreeOrganizedByDeviceTypeViewModel(Machines);
             _organizedByLocationViewModel = new TreeOrganizedByLocationViewModel(Machines);

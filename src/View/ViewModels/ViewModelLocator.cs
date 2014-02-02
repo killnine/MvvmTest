@@ -17,6 +17,7 @@ using GalaSoft.MvvmLight;
 using Microsoft.Practices.ServiceLocation;
 using Ninject;
 using View.ViewModels;
+using View.ViewModels.Administration;
 
 namespace View.ViewModel
 {
@@ -39,12 +40,14 @@ namespace View.ViewModel
             if (ViewModelBase.IsInDesignModeStatic)
             {
                 // Create design time view services and models
+                k.Bind<MachineViewModel>().ToSelf();
                 k.Bind<MachineStatusViewModel>().ToSelf();
                 k.Bind<SystemsViewModel>().ToSelf();
             }
             else
             {
                 // Create run time view services and models
+                k.Bind<MachineViewModel>().ToSelf();
                 k.Bind<MachineStatusViewModel>().ToSelf();
                 k.Bind<SystemsViewModel>().ToSelf();
             }

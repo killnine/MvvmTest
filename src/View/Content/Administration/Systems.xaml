@@ -13,14 +13,14 @@
             <TextBlock Style="{StaticResource Heading2}" Text="{Binding SystemName}"/>
         </DataTemplate>
     </UserControl.Resources>
-    <Grid Style="{StaticResource ContentRoot}" Margin="0">
+    <Grid Style="{StaticResource ContentRoot}" Margin="16,28,16,16">
     	<Grid.RowDefinitions>
     		<RowDefinition Height="Auto"/>
     		<RowDefinition/>
     	</Grid.RowDefinitions>
         <TextBlock Text="Add, Remove, Update Systems" Style="{StaticResource Title}" Margin="0,0,0,1.406" />
     	<ScrollViewer Grid.RowSpan="2" Grid.Row="1">
-    		<StackPanel MinWidth="200" Margin="6">
+    		<StackPanel Margin="6">
     			<Grid>
     				<Grid.RowDefinitions>
     					<RowDefinition Height="Auto"/>
@@ -32,7 +32,7 @@
     					<ColumnDefinition Width="Auto"/>
     					<ColumnDefinition/>
     				</Grid.ColumnDefinitions>
-    				<ListBox Grid.RowSpan="2" Margin="3" MinHeight="200" ItemsSource="{Binding Systems}" SelectedItem="{Binding SelectedSystem}" Padding="6"/>
+    				<ListBox Grid.RowSpan="2" Margin="3" MinHeight="175" ItemsSource="{Binding Systems}" SelectedItem="{Binding SelectedSystem}" Padding="6"/>
     				<mui:ModernButton IconData="{StaticResource SaveIconData}" Command="{Binding SaveSystemCommand}" Content="Save" Grid.Row="2" Grid.Column="2" Margin="3" HorizontalContentAlignment="Left" HorizontalAlignment="Right"/>
     				<TextBlock TextWrapping="Wrap" Text="Description" Grid.Row="1" Grid.Column="1" Margin="3"/>
     				<TextBlock TextWrapping="Wrap" Text="Name" Grid.Column="1" Margin="3"/>

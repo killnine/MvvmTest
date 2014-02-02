@@ -148,6 +148,7 @@
       <DependentUpon>Administration.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ViewModels\Administration\MachineViewModel.cs" />
     <Compile Include="ViewModels\BaseTreeDataViewModel.cs" />
     <Compile Include="ViewModels\Administration\SystemsViewModel.cs" />
     <Compile Include="ViewModels\TreeOrganizedByDeviceTypeViewModel.cs" />
