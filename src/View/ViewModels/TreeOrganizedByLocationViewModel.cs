@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Model;
-using View.Annotations;
 
 namespace View.ViewModel
 {
@@ -14,7 +11,7 @@ namespace View.ViewModel
         public string Location { get; set; }
     }
 
-    public class TreeOrganizedByLocationViewModel : BaseTreeDataViewModel, INotifyPropertyChanged
+    public class TreeOrganizedByLocationViewModel : BaseTreeDataViewModel
     {
         private string _searchTerm;
         public override string SearchTerm
@@ -23,7 +20,7 @@ namespace View.ViewModel
             set
             {
                 _searchTerm = value;
-                OnPropertyChanged("TreeData");
+                RaisePropertyChanged(() => TreeData);
             }
         }
 
@@ -37,7 +34,7 @@ namespace View.ViewModel
             set
             {
                 _treeData = value;
-                OnPropertyChanged("TreeData");
+                RaisePropertyChanged(() => TreeData);
             }
         }
 
@@ -105,16 +102,7 @@ namespace View.ViewModel
                 }
             }
 
-            OnPropertyChanged("TreeData");
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            RaisePropertyChanged(() => TreeData);
         }
 
         public override void FilterData(string searchTerm)

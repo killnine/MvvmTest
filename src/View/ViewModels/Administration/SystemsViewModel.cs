@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
 using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight;
@@ -20,7 +19,7 @@ namespace View.ViewModels
             set 
             {
                 _systems = value;
-                RaisePropertyChanged(() => this.Systems);
+                RaisePropertyChanged(() => Systems);
             }
         }
 
