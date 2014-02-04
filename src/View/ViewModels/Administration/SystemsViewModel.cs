@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight;
 using Model;
+using Raven.Client;
 
 namespace View.ViewModels
 {
@@ -24,6 +26,8 @@ namespace View.ViewModels
         }
 
         private AutomationSystem _selectedSystem;
+        private IDocumentStore _documentStore;
+
         public AutomationSystem SelectedSystem
         {
             get { return _selectedSystem; }
@@ -34,8 +38,12 @@ namespace View.ViewModels
             }
         }
 
-        public SystemsViewModel()
+        public SystemsViewModel(IDocumentStore documentStore)
         {
+            _documentStore = documentStore;
+
+            _documentStore.Initialize();
+
             if (!IsInDesignMode)
             {
                 RefreshSystems();
@@ -73,7 +81,6 @@ namespace View.ViewModels
 
         private void RefreshSystems(int selectedSystemId = -1)
         {
-            return;
         }
     }
 }

@@ -16,8 +16,6 @@ namespace View.ViewModels.Administration
 {
     public class MachineViewModel : ViewModelBase
     {
-        private IDocumentStore _documentStore;
-
         public ICommand AddMachineCommand { get { return new RelayCommand(AddMachine);}}
         public ICommand RemoveMachineCommand { get { return new RelayCommand(RemoveMachine, CanRemoveMachine);} }
         public ICommand SaveMachineCommand { get { return new RelayCommand(SaveMachine, CanSaveMachine); } }
@@ -42,11 +40,6 @@ namespace View.ViewModels.Administration
                 _selectedMachine = value;
                 RaisePropertyChanged(() => SelectedMachine);
             }
-        }
-
-        public MachineViewModel(IDocumentStore documentStore)
-        {
-            _documentStore = documentStore;
         }
 
         private void SaveMachine()

@@ -12,11 +12,11 @@
   See http://www.galasoft.ch/mvvm
 */
 
-using GalaSoft.MvvmLight;
-using Ninject;
+using Autofac;
+using Autofac.Extras.CommonServiceLocator;
+using Microsoft.Practices.ServiceLocation;
 using Raven.Client;
 using Raven.Client.Embedded;
-using Raven.Database.Server;
 using View.ViewModels;
 using View.ViewModels.Administration;
 
@@ -29,67 +29,40 @@ namespace View.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
-        readonly StandardKernel _kernel = new StandardKernel();
-
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
-        public ViewModelLocator()
-        {  
-            if (ViewModelBase.IsInDesignModeStatic)
-            {
-                // Create design time view services and models
-                _kernel.Bind<IDocumentStore>().ToMethod(context =>
+        static ViewModelLocator()
+        {
+            var containerBuilder = new ContainerBuilder();
+
+            containerBuilder.RegisterInstance(new EmbeddableDocumentStore()
                 {
-                    NonAdminHttp.EnsureCanListenToWhenInNonAdminContext(8080);
-                    var documentStore = new EmbeddableDocumentStore
-                    {
-                        DataDirectory = "Data",
-                        UseEmbeddedHttpServer = true
-                    };
-                    return documentStore.Initialize();
-                }).InSingletonScope();
-                _kernel.Bind<MachineViewModel>().ToSelf();
-                _kernel.Bind<MachineStatusViewModel>().ToSelf();
-                _kernel.Bind<SystemsViewModel>().ToSelf();
-            }
-            else
-            {
-                // Create run time view services and models
-                _kernel.Bind<IDocumentStore>().ToMethod(context =>
-                {
-                    NonAdminHttp.EnsureCanListenToWhenInNonAdminContext(8080);
-                    var documentStore = new EmbeddableDocumentStore
-                    {
-                        DataDirectory = "Data",
-                        UseEmbeddedHttpServer = true
-                    };
-                    return documentStore.Initialize();
-                }).InSingletonScope();
-                _kernel.Bind<MachineViewModel>().ToSelf();
-                _kernel.Bind<MachineStatusViewModel>().ToSelf();
-                _kernel.Bind<SystemsViewModel>().ToSelf();
-            }
+                    DataDirectory = "Data",
+                    UseEmbeddedHttpServer = true
+                }).As<IDocumentStore>().SingleInstance();
+
+            containerBuilder.RegisterType<MachineViewModel>();
+            containerBuilder.RegisterType<MachineStatusViewModel>();
+            containerBuilder.RegisterType<SystemsViewModel>();
+
+            var container = containerBuilder.Build();
+            ServiceLocator.SetLocatorProvider(() => new AutofacServiceLocator(container));
         }
 
         public MachineViewModel MachineViewModel
         {
-            get { return _kernel.Get<MachineViewModel>(); }
+            get { return ServiceLocator.Current.GetInstance<MachineViewModel>(); }
         }
 
         public MachineStatusViewModel MachineStatus
         {
-            get { return _kernel.Get<MachineStatusViewModel>(); }
+            get { return ServiceLocator.Current.GetInstance<MachineStatusViewModel>(); }
         }
 
         public SystemsViewModel SystemsViewModel
         {
-            get { return _kernel.Get<SystemsViewModel>(); }
-        }
-
-        public static void Cleanup()
-        {
-            // TODO Clear the ViewModels
+            get { return ServiceLocator.Current.GetInstance<SystemsViewModel>(); }
         }
     }
 }

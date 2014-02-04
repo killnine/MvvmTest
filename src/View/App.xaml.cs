@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using Raven.Client;
+using Raven.Client.Embedded;
+using Raven.Database.Server;
+using View.ViewModel;
 
 namespace View
 {
