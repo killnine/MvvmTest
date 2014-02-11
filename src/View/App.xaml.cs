@@ -1,8 +1,5 @@
 ﻿using System.Windows;
-using Raven.Client;
 using Raven.Client.Embedded;
-using Raven.Database.Server;
-using View.ViewModel;
 
 namespace View
 {
@@ -11,5 +8,15 @@ namespace View
     /// </summary>
     public partial class App : Application
     {
+        public static EmbeddableDocumentStore DocumentStore = new EmbeddableDocumentStore()
+            {
+                DataDirectory = "Data",
+                UseEmbeddedHttpServer = true
+            };
+
+        public App()
+        {
+            DocumentStore.Initialize();
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace Model
     {
         private IList<Device> _devices = new List<Device>();
 
-        public int MachineId { get; set; }
+        public string Id { get; set; }
         public string Location { get; set; }
         public string MachineName { get; set; }
         public IList<Device> Devices

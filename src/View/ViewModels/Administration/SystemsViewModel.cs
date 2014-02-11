@@ -1,21 +1,23 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight;
 using Model;
+using Raven.Abstractions.Data;
 using Raven.Client;
 
 namespace View.ViewModels
 {
     public class SystemsViewModel : ViewModelBase
     {
-        public ICommand AddSystemCommand { get { return new RelayCommand(AddSystem);}}
+        private readonly IDocumentStore _documentStore;
+
+        public ICommand AddSystemCommand { get { return new RelayCommand(arg => AddSystem());}}
         public ICommand RemoveSystemCommand { get { return new RelayCommand(RemoveSystem, CanRemoveSystem);} }
         public ICommand SaveSystemCommand { get { return new RelayCommand(SaveSystem, CanSaveSystem);} }
 
-        private IList<AutomationSystem> _systems;
-        public IList<AutomationSystem> Systems
+        private ObservableCollection<AutomationSystem> _systems;
+        public ObservableCollection<AutomationSystem> Systems
         {
             get { return _systems; }
             set 
@@ -26,8 +28,6 @@ namespace View.ViewModels
         }
 
         private AutomationSystem _selectedSystem;
-        private IDocumentStore _documentStore;
-
         public AutomationSystem SelectedSystem
         {
             get { return _selectedSystem; }
@@ -42,21 +42,35 @@ namespace View.ViewModels
         {
             _documentStore = documentStore;
 
-            _documentStore.Initialize();
-
             if (!IsInDesignMode)
             {
                 RefreshSystems();
             }
             else
             {
-                Systems = new List<AutomationSystem> { new AutomationSystem { SystemName = "Test System Name", Description = "Sample Description for a Small System"}};
+                Systems = new ObservableCollection<AutomationSystem>
+                    {
+                        new AutomationSystem
+                            {
+                                SystemName = "Test System Name",
+                                Description = "Sample Description for a Small System"
+                            }
+                    };
             }
         }
 
-        private void AddSystem(object obj)
+        private void AddSystem()
         {
-            return;
+            var newSystem = new AutomationSystem() {SystemName = "<New System>"};
+            using (var session = _documentStore.OpenSession())
+            {
+                session.Store(newSystem);
+                session.SaveChanges();
+
+                Systems.Add(newSystem);
+            }
+
+            RefreshSystems();
         }
 
         private bool CanRemoveSystem(object arg)
@@ -66,7 +80,14 @@ namespace View.ViewModels
 
         private void RemoveSystem(object obj)
         {
-            return;
+            using (var session = _documentStore.OpenSession())
+            {
+                session.Delete(SelectedSystem);
+                session.SaveChanges();
+            }
+
+            Systems.Remove(SelectedSystem);
+            SelectedSystem = null;
         }
 
         private bool CanSaveSystem(object arg)
@@ -74,13 +95,31 @@ namespace View.ViewModels
             return SelectedSystem != null;
         }
 
-        public void SaveSystem(object obj)
+        private void SaveSystem(object obj)
         {
-            return;
+            _documentStore.DatabaseCommands.Patch(SelectedSystem.Id, new[]
+                {
+                    new PatchRequest
+                        {
+                            Type = PatchCommandType.Set,
+                            Name = "SystemName",
+                            Value = SelectedSystem.SystemName
+                        },
+                    new PatchRequest
+                        {
+                            Type = PatchCommandType.Set,
+                            Name = "Description",
+                            Value = SelectedSystem.Description
+                        }
+                });
         }
 
         private void RefreshSystems(int selectedSystemId = -1)
         {
+            using (var session = _documentStore.OpenSession())
+            {
+                Systems = new ObservableCollection<AutomationSystem>(session.Query<AutomationSystem>());
+            }
         }
     }
 }

@@ -32,7 +32,7 @@
     					<ColumnDefinition Width="Auto"/>
     					<ColumnDefinition/>
     				</Grid.ColumnDefinitions>
-    				<ListBox Grid.RowSpan="2" Margin="3" MinHeight="175" ItemsSource="{Binding Systems}" SelectedItem="{Binding SelectedSystem}" Padding="6"/>
+    				<ListBox Grid.RowSpan="2" Margin="3" MinHeight="175" ItemsSource="{Binding Systems, Mode=TwoWay}" SelectedItem="{Binding SelectedSystem, Mode=TwoWay}" Padding="6"/>
     				<mui:ModernButton IconData="{StaticResource SaveIconData}" Command="{Binding SaveSystemCommand}" Content="Save" Grid.Row="2" Grid.Column="2" Margin="3" HorizontalContentAlignment="Left" HorizontalAlignment="Right"/>
     				<TextBlock TextWrapping="Wrap" Text="Description" Grid.Row="1" Grid.Column="1" Margin="3"/>
     				<TextBlock TextWrapping="Wrap" Text="Name" Grid.Column="1" Margin="3"/>
